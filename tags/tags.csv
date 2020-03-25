@@ -1,0 +1,36 @@
+group,element,multiplicity,name,description
+0x0002,0x0010,1,Transfer Syntax UID,Transfer Syntax UID
+0x0010,0x0010,1,Patient's Name,Patient Name
+0x0010,0x1010,1,Patient's Age,Patient Age
+0x0010,0x0020,1,Patient ID,Patient ID
+0x0010,0x0021,1,Issuer of Patient ID,Issuer Of Patient ID
+0x0010,0x0022,1,Type of Patient ID,Type Of Patient ID
+0x0010,0x0024,1,Issuer of Patient ID Qualifiers Sequence,Issuer Of Patient ID Qualifiers Sequence
+0x0010,0x0026,1,Source Patient Group Identification Sequence,Source Patient Group Identification Sequence
+0x0010,0x0027,1,Group of Patients Identification Sequence,Group Of Patients Identification Sequence
+0x0010,0x0028,1,Subject Relative Position in Image,Subject Relative Position In Image
+0x0010,0x0030,1,Patient's Birth Date,Patient Birth Date
+0x0010,0x0032,1,Patient's Birth Time,Patient Birth Time
+0x0010,0x0033,1,Patient's Birth Date in Alternative Calendar,Patient Birth Date In Alternative Calendar
+0x0010,0x0034,1,Patient's Death Date in Alternative Calendar,Patient Death Date In Alternative Calendar
+0x0010,0x0035,1,Patient's Alternative Calendar,Patient Alternative Calendar
+0x0010,0x0040,1,Patient's Sex,Patient Sex
+0x0010,0x0050,1,Patient's Insurance Plan Code Sequence,Patient Insurance Plan Code Sequence
+0x0008,0x0022,1,Acquisition Date,Acquisition Date
+0x0028,0x0002,1,Samples Per Pixel,Samples Per Pixel
+0x0028,0x0004,1,Photometric Interpretation,Photometric Interpretation
+0x0028,0x0008,1,Number of frames,Number of frames
+0x0028,0x0010,1,Rows,Rows
+0x0028,0x0011,1,Columns,Columns
+0x0028,0x0100,1,Bits Allocated,Bits Allocated
+0x0028,0x0101,1,Bits Stored,Bits Stored
+0x0028,0x0102,1,High Bit,Hight Bit
+0x0028,0x0103,1,Pixel Representation,Pixel Representation
+0x0028,0x0006,1,Planar Configuration,Planar Configuration
+0x7FE0,0x0010,1,Pixel Data,Pixel Data
+0x0028,0x0030,2,Pixel Spacing,Pixel Spacing
+0x0020,0x0037,1,Image Orientation,Image Orientation
+0x0020,0x0032,1,Image Position,Image Position
+0xFFFE,0xE000,1,Item,Item
+0xFFFE,0xE00D,1,Item delimitation,Item delimitation
+0xFFFE,0xE0DD,1,Sequence delimitation,Sequence delimitation
