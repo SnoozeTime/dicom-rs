@@ -34,3 +34,5 @@ group,element,multiplicity,name,description
 0xFFFE,0xE000,1,Item,Item
 0xFFFE,0xE00D,1,Item delimitation,Item delimitation
 0xFFFE,0xE0DD,1,Sequence delimitation,Sequence delimitation
+0x0028,0x1050,1,Window Center,Window Center
+0x0028,0x1051,1,Window Width,Window Width

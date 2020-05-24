@@ -31,6 +31,9 @@ pub enum DicomError {
     #[error("Cannot parse AS to Age = {0}")]
     ParseAS(String),
 
+    #[error(transparent)]
+    ParseIS(#[from] std::num::ParseIntError),
+
     #[error("Cannot save to PNG, image format is not supported")]
     ImageFormatNotSupported,
 

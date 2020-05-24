@@ -1,3 +1,4 @@
+use dicom::Tag;
 use std::fs::File;
 use std::io::Read;
 use std::time::Instant;
@@ -20,6 +21,11 @@ fn main() {
 
     let obj = res.unwrap();
     //println!("{:?}", obj);
+
+    println!("Bits allocated {:?}", obj.get::<u16>(Tag::x0028x0100));
+    println!("Bits stored {:?}", obj.get::<u16>(Tag::x0028x0101));
+    println!("Window Center {:?}", obj.get::<String>(Tag::x0028x1050));
+    println!("Window Width {:?}", obj.get::<String>(Tag::x0028x1051));
 
     if let Some(img) = obj.image {
         img.save(save_to).unwrap();

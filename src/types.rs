@@ -208,6 +208,30 @@ impl FromDicomValue for u16 {
     }
 }
 
+/// Implementation of the trait for i32. It corresponds to the VR IS (integer string)
+/// A string of characters representing an Integer in base-10 (decimal), shall contain only
+/// the characters 0 - 9, with an optional leading "+" or "-".
+/// It may be padded with leading and/or trailing spaces. Embedded spaces are not allowed.
+///
+/// The integer, n, represented shall be in the range:
+///
+/// -231<= n <= (231-1).
+impl FromDicomValue for i32 {
+    fn from_element(el: &DataElement, _transfer_syntax: &TransferSyntax) -> Result<Self, DicomError> {
+        if let Value::Buf(data) = el.data {
+            let v = remove_whitespace(std::str::from_utf8(data)?);
+            let is: i32 = v.parse()?;
+            Ok(is)
+        } else {
+            Err(DicomError::ConvertTypeExpectBuf("i32".to_string()))
+        }
+    }
+}
+
+fn remove_whitespace(s: &str) -> String {
+    s.chars().filter(|c| !c.is_whitespace()).collect()
+}
+
 impl FromDicomValue for String {
     fn from_element(
         el: &DataElement,
@@ -549,6 +573,59 @@ mod test {
         };
 
         let v: Result<PersonName, _> =
+            FromDicomValue::from_element(&el, &TransferSyntax::little_endian_implicit());
+        assert!(v.is_ok());
+        assert_eq!(expected, v.unwrap());
+    }
+
+    #[test]
+    fn from_el_is_positivewithplus() {
+        let expected = 10i32;
+        let bytes = String::from("  +10  ");
+        let el = DataElement {
+            tag: Tag::x0002x0010,
+            length: 0,
+            data: Value::Buf(bytes.as_bytes()),
+            vr: None,
+        };
+
+        let v: Result<i32, _> =
+            FromDicomValue::from_element(&el, &TransferSyntax::little_endian_implicit());
+        assert!(v.is_ok());
+        assert_eq!(expected, v.unwrap());
+    }
+
+
+    #[test]
+    fn from_el_is_positivewithoutplus() {
+        let expected = 10i32;
+        let bytes = String::from("  10  ");
+        let el = DataElement {
+            tag: Tag::x0002x0010,
+            length: 0,
+            data: Value::Buf(bytes.as_bytes()),
+            vr: None,
+        };
+
+        let v: Result<i32, _> =
+            FromDicomValue::from_element(&el, &TransferSyntax::little_endian_implicit());
+        assert!(v.is_ok());
+        assert_eq!(expected, v.unwrap());
+    }
+
+
+    #[test]
+    fn from_el_is_negative() {
+        let expected = -10i32;
+        let bytes = String::from("  -10  ");
+        let el = DataElement {
+            tag: Tag::x0002x0010,
+            length: 0,
+            data: Value::Buf(bytes.as_bytes()),
+            vr: None,
+        };
+
+        let v: Result<i32, _> =
             FromDicomValue::from_element(&el, &TransferSyntax::little_endian_implicit());
         assert!(v.is_ok());
         assert_eq!(expected, v.unwrap());
